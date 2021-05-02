@@ -35,7 +35,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
+            <a href="{{ route('dashboard') }}" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -45,19 +45,40 @@
           </li>
       
         <li class="nav-header">MENU</li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-user-alt"></i>
+        <li class="nav-item menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-map"></i>
               <p>
-                Manejemen User
+                Maps
+                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('kabupaten') }}" class="nav-link {{ request()->is('kabupaten') ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-cube"></i>
+                  <p>Kabupaten</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('kategori') }}" class="nav-link {{ request()->is('kategori') ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-map-pin"></i>
+                  <p>Kategori</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Objek Wisata</p>
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-map-marker"></i> 
+              <i class="nav-icon fas fa-user"></i>
               <p>
-                Maps
+                User
               </p>
             </a>
           </li>

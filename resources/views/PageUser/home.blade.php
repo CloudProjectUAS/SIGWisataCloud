@@ -21,17 +21,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- LEAFLET -->
 
-<!-- leaflet css  -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
   crossorigin=""/>
-<!-- leaflet js  -->
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
   crossorigin=""></script>
-<!-- bootstrap cdn  -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-  integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
 </head>
 <body class="hold-transition layout-top-nav">
@@ -64,7 +59,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             Pemetaan Objek Wisata Bali
           </div>
           <div class="card-body">
-            <div id="mapid" style="width: 1050px; height: 500px; "></div>
+            <div id="map" style="width: 100%; height: 500px; "></div>
           </div>
         </div>        
       </div><!-- /.container-fluid -->
@@ -85,35 +80,70 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- ./wrapper -->
 
 <script>
-  var mymap = L.map('mapid').setView([-8.385159, 115.130676], 10);   
-    L.tileLayer(
-      'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZGlhaHB1dHJpbSIsImEiOiJja2xrbHRxcHkwb2d6MnBvYnJlemlpZWZpIn0.sWcJMwGJz4ImxXYqa2Iahw', {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        maxZoom: 20,
-        id: 'mapbox/streets-v11', //menggunakan peta model streets-v11 kalian bisa melihat jenis-jenis peta lainnnya di web resmi mapbox
-        tileSize: 512,
-        zoomOffset: -1,
-        accessToken: 'your.mapbox.access.token'
-    }).addTo(mymap);
-            
-    var marker = L.marker([-8.385159, 115.130676],{
-      draggable: "true"
-    }).addTo(mymap);
-            
-    var popup = L.popup();
+  var peta1 = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+        '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      id: 'mapbox/streets-v11'
+  });
 
-    function onMapClick(e) {
-      popup
-        .setLatLng(e.latlng)
-        .setContent("koordinatnya adalah " + e.latlng
-        .toString()
-        ) //set isi konten yang ingin ditampilkan, kali ini kita akan menampilkan latitude dan longitude
-        .openOn(mymap);
+  var peta2 = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+        '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      id: 'mapbox/satellite-v9'
+  });
 
-      document.getElementById('latlong').value = e.latlng //value pada form latitude, longitude akan berganti secara otomatis
-    }
-    
-    mymap.on('click', onMapClick); //jalankan fungsi
+
+  var peta3 = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  });
+
+  var peta4 = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+        '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      id: 'mapbox/dark-v10'
+  });
+
+  @foreach ($kabupaten as $data)
+    var data{{ $data->id }} = L.layerGroup();
+  @endforeach
+
+  var map = L.map('map', {
+    center: [-8.40845089491575, 115.20058550393681],
+    zoom: 10,
+    layers: [peta1, 
+    @foreach ($kabupaten as $data)
+      data{{ $data->id }},
+    @endforeach
+    ]
+  });
+
+  var baseMaps = {
+    "Grayscale": peta1,
+    "Satellite": peta2,
+    "Streets": peta3,
+    "Dark": peta4,
+  };
+
+  var overlayer = {
+    @foreach ($kabupaten as $data)
+    "{{ $data->kabupaten }} " : data{{ $data->id }},
+    @endforeach
+  };
+
+  L.control.layers(baseMaps, overlayer).addTo(map);
+
+  @foreach ($kabupaten as $data)
+    L.geoJSON(<?= $data->geojson ?>, {
+      style : {
+        color : 'white', 
+        fillColor : '{{ $data->warna }}', 
+        fillOpacity : 0.8, 
+      },
+    }).addTo(data{{ $data->id }});
+  @endforeach
 
 </script>
 

@@ -36,7 +36,6 @@ class LoginController extends Controller
     }
 
     public function postregister (Request $request) {
-        //dd($request->all());
 
         User::create([
             'name' => $request->name,
