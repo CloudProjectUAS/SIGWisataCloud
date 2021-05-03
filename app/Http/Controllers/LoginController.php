@@ -19,7 +19,11 @@ class LoginController extends Controller
 
         if(Auth::attempt(
             $request->only('email', 'password'))){
-                return redirect('/Dashboard');
+                if(Auth::user()->level == "admin"){
+                    return redirect('/Dashboard');
+                }else{
+                    return redirect('/Home');
+                }
             }
             return redirect('/');
     }

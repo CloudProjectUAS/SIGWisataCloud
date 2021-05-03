@@ -67,8 +67,8 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="{{ route('objek-wisata') }}" class="nav-link {{ request()->is('kategori') ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-fighter-jet"></i>
                   <p>Objek Wisata</p>
                 </a>
               </li>
@@ -79,14 +79,6 @@
               <i class="nav-icon fas fa-user"></i>
               <p>
                 User
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
-              <p>
-                Article
               </p>
             </a>
           </li>

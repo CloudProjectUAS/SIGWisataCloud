@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KabupatenController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\ObjekWisataController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,3 +54,11 @@ Route::post('/Kategori/Insert', [KategoriController::class, 'insert'])->name('in
 Route::get('/Kategori/Edit/{id}', [KategoriController::class, 'edit'])->name('edit-kategori');
 Route::post('/Kategori/Update/{id}', [KategoriController::class, 'update'])->name('update-kategori');
 Route::get('/Kategori/Delete/{id}', [KategoriController::class, 'delete'])->name('delete-kategori');
+
+//Objek Wisata
+Route::get('/ObjekWisata', [ObjekWisataController::class, 'index'])->name('objek-wisata');
+Route::get('/ObjekWisata/Add', [ObjekWisataController::class, 'create'])->name('add-objek-wisata');
+Route::post('/ObjekWisata/Insert', [ObjekWisataController::class, 'insert'])->name('insert-objek-wisata');
+Route::get('/ObjekWisata/Edit/{id}', [ObjekWisataController::class, 'edit'])->name('edit-objek-wisata');
+Route::post('/ObjekWisata/Update/{id}', [ObjekWisataController::class, 'update'])->name('update-objek-wisata');
+Route::get('/ObjekWisata/Delete/{id}', [ObjekWisataController::class, 'delete'])->name('delete-objek-wisata');
