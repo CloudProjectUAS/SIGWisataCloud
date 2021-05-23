@@ -43,9 +43,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container">
         <div class="row mb-2">
           <div class="col-sm-6">
-      
+
           </div><!-- /.col -->
-          
+
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
@@ -61,7 +61,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="card-body">
             <div id="map" style="width: 100%; height: 500px; "></div>
           </div>
-        </div>        
+        </div>
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
@@ -110,13 +110,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
     var data{{ $data->id }} = L.layerGroup();
   @endforeach
 
+    var objekwisata = L.layerGroup();
+
   var map = L.map('map', {
     center: [-8.40845089491575, 115.20058550393681],
     zoom: 10,
-    layers: [peta1, 
+    layers: [peta1,
     @foreach ($kabupaten as $data)
       data{{ $data->id }},
     @endforeach
+    objekwisata,
     ]
   });
 
@@ -131,6 +134,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     @foreach ($kabupaten as $data)
     "{{ $data->kabupaten }} " : data{{ $data->id }},
     @endforeach
+    "Objek Wisata": objekwisata,
   };
 
   L.control.layers(baseMaps, overlayer).addTo(map);
@@ -138,11 +142,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
   @foreach ($kabupaten as $data)
     L.geoJSON(<?= $data->geojson ?>, {
       style : {
-        color : 'white', 
-        fillColor : '{{ $data->warna }}', 
-        fillOpacity : 0.8, 
+        color : 'white',
+        fillColor : '{{ $data->warna }}',
+        fillOpacity : 0.8,
       },
     }).addTo(data{{ $data->id }});
+  @endforeach
+
+  @foreach ($objekwisata as $data)
+  var iconobjekwisata = L.icon({
+    iconUrl: '{{asset('Icons')}}/{{ $data->icon }}',
+    iconSize:     [30, 30], // size of the icon
+  });
+
+  var info = '<table class="table table-bordered"><tr><td colspan="2" class="text-center"><img src="{{asset('Foto')}}/{{ $data->foto }}" width="200px"></td></tr><tbody><tr><td>Objek Wisata</td><td>{{ $data->objek_wisata }}</td></tr><tr><td>Kategori</td><td>{{ $data->kategori }}</td></tr><tr><td>Status</td><td>{{ $data->status }}</td></tr><tr><td colspan="2"><a href="/DetailObjekWisata/{{ $data->id }}" class="btn btn-primary btn-sm btn-block">Detail</td></tr></tbody></table>';
+
+    L.marker([<?= $data->posisi ?>], {icon: iconobjekwisata}).addTo(objekwisata)
+    .bindPopup(info);
   @endforeach
 
 </script>

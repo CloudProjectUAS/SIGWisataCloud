@@ -76,6 +76,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <th class="text-center">Kategori</th>
                       <th class="text-center">Status</th>
                       <th class="text-center">Kabupaten</th>
+                      <th class="text-center">Foto</th>
                       <th width="100px" class="text-center">Action</th>
                     </tr>
                   </thead>
@@ -88,6 +89,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <td class="text-center">{{ $data->kategori }}</td>
                         <td class="text-center">{{ $data->status }}</td>
                         <td class="text-center">{{ $data->kabupaten }}</td>
+                        <td class="text-center"><img src="{{asset('Foto')}}/{{ $data->foto }}" width="60px"></td>
                         <td class="text-center">
                           <a href="/ObjekWisata/Edit/{{ $data->id }}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-edit"></i></a>
                           <button class="btn btn-sm btn-flat btn-danger" data-toggle="modal" data-target="#delete{{ $data->id }}"><i class="fa fa-trash"></i></button>

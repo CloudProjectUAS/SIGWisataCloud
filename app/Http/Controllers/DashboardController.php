@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -11,9 +12,21 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function __construct()
+     {
+         $this->middleware('auth');
+     }
+
     public function index()
     {
-        return view('PageAdmin.dashboard');
+        $data = [
+            'kabupaten' => DB::table('kabupaten')->count(),
+            'kategori' => DB::table('kategori')->count(),
+            'objekwisata' => DB::table('objek_wisata')->count(),
+            'user' => DB::table('users')->count(),
+        ];
+        return view('PageAdmin.dashboard', $data);
     }
 
     /**

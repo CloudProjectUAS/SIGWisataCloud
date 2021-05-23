@@ -73,6 +73,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <label>Kategori</label>
                         <select name="id_kategori" class="form-control">
                           <option value="">--Pilih Kategori--</option>
+                          @foreach ($kategori as $data)
+                            <option value="{{ $data->id }}">{{ $data->kategori }}</option>
+                          @endforeach
                         </select>
                         <div class="text-danger">
                           @error('id_kategori')
@@ -86,6 +89,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <label>Status</label>
                         <select name="status" class="form-control">
                           <option value="">--Pilih Status--</option>
+                          <option value="pengelolaan">Dalam Pengelola</option>
+                          <option value="alami">Alami</option>
                         </select>
                         <div class="text-danger">
                           @error('status')
@@ -99,6 +104,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <label>Kabupaten</label>
                         <select name="id_kabupaten" class="form-control">
                           <option value="">--Pilih Kabupaten--</option>
+                          @foreach ($kabupaten as $data)
+                            <option value="{{ $data->id }}">{{ $data->kabupaten }}</option>
+                          @endforeach
                         </select>
                         <div class="text-danger">
                           @error('id_kabupaten')
@@ -283,7 +291,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   map.on("click", function(event){
     var lat = event.latlng.lat;
     var lng = event.latlng.lng;
-    
+
     if (!marker){
       marker = L.marker(event.latlng).addTo(map);
     } else {

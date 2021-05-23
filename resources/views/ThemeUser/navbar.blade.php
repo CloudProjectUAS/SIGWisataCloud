@@ -1,6 +1,6 @@
 <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <div class="container">
-      <a href="#" class="navbar-brand">
+      <a href="{{ route('home') }}" class="navbar-brand">
         <img src="{{asset('Pictures/maps.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">Wisata 4.0</span>
       </a>
@@ -13,30 +13,28 @@
         <!-- Left navbar links -->
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a href="#" class="nav-link">Home</a>
+            <a href="{{ route('home') }}" class="nav-link">Home</a>
           </li>
           <li class="nav-item dropdown">
-            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Menu</a>
+            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Kabupaten</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-              <li><a href="#" class="dropdown-item">Maps </a></li>
-              <li class="dropdown-divider"></li>
-              <li><a href="#" class="dropdown-item">Articles</a></li>
-
+            @foreach ($kabupaten as $data)
+                <li><a href="/Kabupaten/{{ $data->id }}" class="dropdown-item">{{ $data->kabupaten }}</a></li>
+            @endforeach
             </ul>
           </li>
+          <li class="nav-item dropdown">
+            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Kategori</a>
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+            @foreach ($kategori as $data)
+                <li><a href="/Kategori/{{ $data->id }}" class="dropdown-item">{{ $data->kategori }}</a></li>
+            @endforeach
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">About</a>
+          </li>
         </ul>
-
-        <!-- SEARCH FORM -->
-        <form class="form-inline ml-10 ml-md-10">
-          <div class="input-group input-group-sm">
-            <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-            <div class="input-group-append">
-              <button class="btn btn-navbar" type="submit">
-                <i class="fas fa-search"></i>
-              </button>
-            </div>
-          </div>
-        </form>
       </div>
 
       <!-- Right navbar links -->
@@ -47,12 +45,6 @@
               <li><a href="{{ route('logout') }}" class="dropdown-item">Log Out </a></li>
             </ul>
           </li>
-        <!-- Notifications Dropdown Menu -->
-        <li class="nav-item">
-          <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-            <i class="fas fa-th-large"></i>
-          </a>
-        </li>
       </ul>
     </div>
   </nav>

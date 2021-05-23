@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KabupatenController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ObjekWisataController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,3 +63,15 @@ Route::post('/ObjekWisata/Insert', [ObjekWisataController::class, 'insert'])->na
 Route::get('/ObjekWisata/Edit/{id}', [ObjekWisataController::class, 'edit'])->name('edit-objek-wisata');
 Route::post('/ObjekWisata/Update/{id}', [ObjekWisataController::class, 'update'])->name('update-objek-wisata');
 Route::get('/ObjekWisata/Delete/{id}', [ObjekWisataController::class, 'delete'])->name('delete-objek-wisata');
+
+//User
+Route::get('/UserProfile', [UserController::class, 'index'])->name('user');
+Route::get('/UserProfile/Add', [UserController::class, 'create'])->name('add-user');
+Route::post('/UserProfile/Insert', [UserController::class, 'insert'])->name('insert-user');
+Route::get('/UserProfile/Edit/{id}', [UserController::class, 'edit'])->name('edit-user');
+Route::post('/UserProfile/Update/{id}', [UserController::class, 'update'])->name('update-user');
+Route::get('/UserProfile/Delete/{id}', [UserController::class, 'delete'])->name('delete-user');
+
+//Home
+Route::get('/Kabupaten/{id}', [HomeController::class, 'kabupaten'])->name('home-kabupaten');
+Route::get('/Kategori/{id}', [HomeController::class, 'kategori'])->name('home-kategori');

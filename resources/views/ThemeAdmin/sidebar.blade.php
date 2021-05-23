@@ -10,7 +10,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{asset('Pictures/admin.png')}}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{ asset('User') }}/{{ auth()->user()->foto }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">{{ auth()->user()->name }}</a>
@@ -43,7 +43,7 @@
               </p>
             </a>
           </li>
-      
+
         <li class="nav-header">MENU</li>
         <li class="nav-item menu-open">
             <a href="#" class="nav-link active">
@@ -75,7 +75,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ route('user') }}"" class="nav-link {{ request()->is('user') ? 'active' : '' }}">
               <i class="nav-icon fas fa-user"></i>
               <p>
                 User
