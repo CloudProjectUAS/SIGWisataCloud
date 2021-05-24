@@ -75,3 +75,4 @@ Route::get('/UserProfile/Delete/{id}', [UserController::class, 'delete'])->name(
 //Home
 Route::get('/Kabupaten/{id}', [HomeController::class, 'kabupaten'])->name('home-kabupaten');
 Route::get('/Kategori/{id}', [HomeController::class, 'kategori'])->name('home-kategori');
+Route::get('/DetailObjekWisata/{id}', [HomeController::class, 'detailobjekwisata'])->name('detail-objek-wisata');

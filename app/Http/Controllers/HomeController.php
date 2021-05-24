@@ -51,4 +51,17 @@ class HomeController extends Controller
 
         return view('PageUser.home-kategori', $data);
     }
+
+    public function detailobjekwisata($id)
+    {
+        $objekwisata = $this->Home->DetailDataObjekWisata($id);
+        $data = [
+            'title' => $objekwisata->objek_wisata,
+            'kabupaten' => $this->Home->DataKabupaten(),
+            'kategori' => $this->Home->DataKategori(),
+            'objekwisata' => $objekwisata,
+        ];
+
+        return view('PageUser.home-detail-objek', $data);
+    }
 }

@@ -53,4 +53,13 @@ class Home extends Model
         ->join('kabupaten', 'kabupaten.id', '=', 'objek_wisata.id_kabupaten')
         ->get();
     }
+
+    public function DetailDataObjekWisata($id)
+    {
+        return DB::table('objek_wisata')
+        ->join('kategori', 'kategori.id', '=', 'objek_wisata.id_kategori')
+        ->join('kabupaten', 'kabupaten.id', '=', 'objek_wisata.id_kabupaten')
+        ->where('objek_wisata.id', $id)
+        ->first();
+    }
 }
