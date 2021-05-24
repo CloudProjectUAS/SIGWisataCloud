@@ -149,7 +149,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   var map = L.map('map', {
     center: [{{ $objekwisata->posisi }}],
-    zoom: 10,
+    zoom: 14,
     layers: [peta3],
   });
 
@@ -164,7 +164,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   var iconobjekwisata = L.icon({
     iconUrl: '{{asset('Icons')}}/{{ $objekwisata->icon }}',
-    iconSize:     [30, 30], // size of the icon
+    iconSize:     [50, 50], // size of the icon
   });
 
     L.marker([<?= $objekwisata->posisi ?>], {icon: iconobjekwisata}).addTo(map);
